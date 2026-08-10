@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>3D Tooth Renderer</title>
+  <style>
+    body { margin: 0; background: transparent; overflow: hidden; }
+    canvas { display: block; }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+<script>
+  let scene, camera, renderer, mesh;
+  let textures = [];
+  
+  // A custom shader to smoothly crossfade between two textures
+  // and apply a subtle curve to the plane to simulate 3D volume
+  const vertexShader = `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      vec3 pos = position;
+      // Subtle curve: push the edges backward in Z space
+      // This makes the flat plane act like a cylinder
+      float curveIntensity = 0.2; 
+      pos.z -= (pos.x * pos.x) * curveIntensity;
+      
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+    }
+  `;
+
+  const fragmentShader = `
+    uniform sampler2D tex1;
+    uniform sampler2D tex2;
+    uniform float blend;
+    varying vec2 vUv;
+    
+    void main() {
+      vec4 c1 = texture2D(tex1, vUv);
+      vec4 c2 = texture2D(tex2, vUv);
+      
+      // Simple mix for premultiplied alpha or straight alpha
+      gl_FragColor = mix(c1, c2, blend);
+    }
+  `;
+
+  async function init() {
+    scene = new THREE.Scene();
+    
+    // Use an orthographic camera or narrow perspective to avoid extreme perspective distortion
+    camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+    camera.position.z = 20; // Move camera far back so the whole object fits easily
+    
+    renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, preserveDrawingBuffer: true });
+    // Increase canvas size to ensure absolutely no cropping
+    renderer.setSize(1200, 1200);
+    renderer.setClearColor(0x000000, 0); // fully transparent background
+    document.body.appendChild(renderer.domElement);
+
+    const loader = new THREE.TextureLoader();
+    
+    // Load the 8 tooth stages
+    const loadPromises = [];
+    for (let i = 1; i <= 8; i++) {
+      loadPromises.push(new Promise((resolve) => {
+        loader.load(`/images/teeth/stage_${i}.png`, (tex) => {
+          tex.minFilter = THREE.LinearFilter;
+          tex.magFilter = THREE.LinearFilter;
+          tex.format = THREE.RGBAFormat;
+          // Ensure transparent images aren't rendered with dark edges
+          tex.premultiplyAlpha = true;
+          resolve(tex);
+        });
+      }));
+    }
+    
+    textures = await Promise.all(loadPromises);
+
+    // Use a flat PlaneGeometry perfectly mapped to the 1:1 image
+    // Make it 10x10 units, with 64x64 segments so the vertex shader can curve it smoothly
+    const geometry = new THREE.PlaneGeometry(10, 10, 64, 64);
+
+    const material = new THREE.ShaderMaterial({
+      uniforms: {
+        tex1: { value: textures[0] },
+        tex2: { value: textures[0] },
+        blend: { value: 0.0 }
+      },
+      vertexShader: vertexShader,
+      fragmentShader: fragmentShader,
+      transparent: true,
+      depthWrite: false
+    });
+
+    mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+    
+    window.isReady = true;
+  }
+
+  function renderFrame(frameIndex, totalFrames) {
+    const progress = frameIndex / (totalFrames - 1); 
+    
+    // Rotate from -15deg to +15deg for a very subtle, elegant turn
+    const startAngle = -15 * Math.PI / 180;
+    const endAngle = 15 * Math.PI / 180;
+    mesh.rotation.y = startAngle + (endAngle - startAngle) * progress;
+    
+    const texProgress = progress * 7; 
+    const texIndex = Math.floor(texProgress);
+    const texIndexNext = Math.min(texIndex + 1, 7);
+    const blend = texProgress - texIndex;
+    
+    mesh.material.uniforms.tex1.value = textures[texIndex];
+    mesh.material.uniforms.tex2.value = textures[texIndexNext];
+    mesh.material.uniforms.blend.value = blend;
+    
+    renderer.render(scene, camera);
+  }
+
+  window.renderFrame = renderFrame;
+  
+  init();
+</script>
+</body>
+</html>
