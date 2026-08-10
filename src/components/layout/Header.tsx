@@ -46,9 +46,9 @@ export function Header() {
         </nav>
 
         {/* CTA Button */}
-        <button className="hidden md:block bg-[#D3BC91] text-[#071A2A] px-6 py-2.5 text-[13px] font-medium transition-colors hover:bg-white rounded-sm">
+        <Link href="/appointment" className="hidden md:block bg-[#D3BC91] text-[#071A2A] px-6 py-2.5 text-[13px] font-medium transition-colors hover:bg-white rounded-[2px]">
           Book Appointment
-        </button>
+        </Link>
 
       </div>
     </header>

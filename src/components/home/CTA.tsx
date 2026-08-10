@@ -2,6 +2,7 @@
 
 import { Reveal } from "@/components/ui/animations";
 import { ArrowRight, Phone } from "lucide-react";
+import Link from "next/link";
 
 export function CTA() {
   return (
@@ -30,10 +31,10 @@ export function CTA() {
         </Reveal>
 
         <Reveal delay={0.5} className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
-          <button className="bg-brand-gold text-brand-navy px-10 py-5 text-[15px] font-semibold transition-colors hover:bg-white rounded-[2px] tracking-wide flex items-center justify-center gap-3 group w-full sm:w-auto">
+          <Link href="/appointment" className="bg-brand-gold text-brand-navy px-10 py-5 text-[15px] font-semibold transition-colors hover:bg-white rounded-[2px] tracking-wide flex items-center justify-center gap-3 group w-full sm:w-auto">
             Book Appointment
             <ArrowRight size={18} className="transform group-hover:translate-x-1 transition-transform" />
-          </button>
+          </Link>
           
           <button className="bg-white/10 text-white px-10 py-5 text-[15px] font-semibold transition-colors hover:bg-white/20 border border-white/10 rounded-[2px] tracking-wide flex items-center justify-center gap-3 w-full sm:w-auto">
             <Phone size={18} />

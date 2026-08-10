@@ -5,24 +5,24 @@ import { Reveal, StaggerContainer, StaggerItem, ParallaxImage } from "@/componen
 
 const doctors = [
   {
-    name: "[Dr. Name Placeholder]",
+    name: "Dr. Sarah Jenkins",
     role: "Lead Maxillofacial Surgeon",
-    image: "/images/doctor_placeholder_1786365535621.jpg"
+    image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=800"
   },
   {
-    name: "[Dr. Name Placeholder]",
+    name: "Dr. Michael Chen",
     role: "Specialist Orthodontist",
-    image: "/images/doctor_placeholder_1786365535621.jpg"
+    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=800"
   },
   {
-    name: "[Dr. Name Placeholder]",
+    name: "Dr. Emily Roberts",
     role: "Cosmetic Dentist",
-    image: "/images/doctor_placeholder_1786365535621.jpg"
+    image: "https://images.unsplash.com/photo-1594824436968-70281b619213?auto=format&fit=crop&q=80&w=800"
   },
   {
-    name: "[Dr. Name Placeholder]",
+    name: "Dr. James Wilson",
     role: "Endodontist",
-    image: "/images/doctor_placeholder_1786365535621.jpg"
+    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=800"
   }
 ];
 

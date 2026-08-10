@@ -9,7 +9,7 @@ const images = [
   "/images/clinic_interior_1786365439022.jpg",
   "/images/treatment_room_1786365456966.jpg",
   "/images/about_clinic_neutral_1786370182535.jpg",
-  "/images/clinic_interior_1786365439022.jpg" // Using placeholder duplicates for layout
+  "/images/service_cosmetic_1786370221004.jpg" // 4th distinct image
 ];
 
 export function Gallery() {
@@ -107,6 +107,26 @@ export function Gallery() {
               </Reveal>
             </div>
 
+          </div>
+        </div>
+
+        {/* Second Row for 4th distinct image */}
+        <div className="grid grid-cols-1 gap-6 lg:gap-8 mt-6 lg:mt-8">
+          <div className="h-[300px] md:h-[400px] cursor-zoom-in group overflow-hidden relative rounded-[2px]" onClick={() => setSelectedImg(images[3])}>
+            <Reveal delay={0.2} className="w-full h-full">
+              <ParallaxImage 
+                src={images[3]} 
+                alt="Technology & Equipment"
+                parallaxAmount={20}
+                imageClassName="transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-brand-navy/10 group-hover:bg-transparent transition-colors duration-500" />
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
+                  <Maximize2 size={24} />
+                </div>
+              </div>
+            </Reveal>
           </div>
         </div>
 

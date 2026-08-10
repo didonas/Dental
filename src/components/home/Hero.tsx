@@ -5,6 +5,7 @@ import { Play } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import Link from "next/link";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -152,9 +153,9 @@ export function Hero() {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center gap-8">
-            <button className="bg-brand-gold text-brand-navy px-8 py-4 text-[15px] font-semibold transition-colors hover:bg-white rounded-[2px] w-full sm:w-auto text-center tracking-wide">
+            <Link href="/appointment" className="bg-brand-gold text-brand-navy px-8 py-4 text-[15px] font-semibold transition-colors hover:bg-white rounded-[2px] w-full sm:w-auto text-center tracking-wide block">
               Book Appointment
-            </button>
+            </Link>
             <button className="flex items-center gap-3 text-white hover:text-brand-gold transition-colors group">
               <div className="w-12 h-12 rounded-full border border-current flex items-center justify-center transition-colors bg-black/5">
                 <Play size={16} className="ml-1 fill-current" />

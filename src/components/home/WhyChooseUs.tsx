@@ -2,6 +2,7 @@
 
 import { Check, ArrowRight } from "lucide-react";
 import { Reveal, StaggerContainer, StaggerItem, ParallaxImage } from "@/components/ui/animations";
+import Link from "next/link";
 
 const points = [
   "Patient-first approach",
@@ -47,10 +48,10 @@ export function WhyChooseUs() {
           </StaggerContainer>
 
           <Reveal delay={0.8}>
-            <button className="bg-brand-gold text-brand-navy px-8 py-4 text-[15px] font-semibold transition-colors hover:bg-white rounded-[2px] tracking-wide flex items-center gap-3 group">
+            <Link href="/appointment" className="bg-brand-gold text-brand-navy px-8 py-4 text-[15px] font-semibold transition-colors hover:bg-white rounded-[2px] tracking-wide flex items-center gap-3 group w-max">
               Book Your Appointment
               <ArrowRight size={18} className="transform group-hover:translate-x-1 transition-transform" />
-            </button>
+            </Link>
           </Reveal>
         </div>
 
