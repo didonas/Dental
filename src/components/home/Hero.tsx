@@ -62,10 +62,9 @@ export function Hero() {
         frame: TOTAL_FRAMES - 1,
         duration: 1,
         delay: 1,
-        roundProps: "frame",
         onUpdate: () => {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(images[proxy.frame], 0, 0, canvas.width, canvas.height);
+          ctx.drawImage(images[Math.round(proxy.frame)], 0, 0, canvas.width, canvas.height);
         }
       });
       return;
@@ -78,29 +77,31 @@ export function Hero() {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=200%", // Slightly shorter scroll so it doesn't drag on forever
-          scrub: 1,
+          end: "+=150%", 
+          scrub: 2,
           pin: true,
         },
       });
 
+      // Subtle rotation and float on the canvas wrapper
+      gsap.set(canvasRef.current, { rotationY: -8, y: 0, scale: 1 });
+      tl.to(canvasRef.current, {
+        rotationY: 10,
+        y: -5,
+        scale: 1.015,
+        ease: "sine.inOut",
+        duration: 1
+      }, 0);
+
       const frameProxy = { frame: 0 };
       tl.to(frameProxy, {
         frame: TOTAL_FRAMES - 1,
-        snap: "frame",
         ease: "none",
         duration: 1,
         onUpdate: () => {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(images[frameProxy.frame], 0, 0, canvas.width, canvas.height);
+          ctx.drawImage(images[Math.round(frameProxy.frame)], 0, 0, canvas.width, canvas.height);
         }
-      }, 0);
-
-      tl.to(platformRef.current, { 
-        opacity: 0.7, 
-        scale: 1.02, 
-        filter: "brightness(1.5) sepia(0.5)", 
-        duration: 1 
       }, 0);
     });
 
@@ -109,21 +110,29 @@ export function Hero() {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=150%", 
-          scrub: 1,
+          end: "+=120%", 
+          scrub: 2,
           pin: true,
         },
       });
 
+      gsap.set(canvasRef.current, { rotationY: -8, y: 0, scale: 1 });
+      tl.to(canvasRef.current, {
+        rotationY: 10,
+        y: -5,
+        scale: 1.015,
+        ease: "sine.inOut",
+        duration: 1
+      }, 0);
+
       const frameProxy = { frame: 0 };
       tl.to(frameProxy, {
         frame: TOTAL_FRAMES - 1,
-        snap: "frame",
         ease: "none",
         duration: 1,
         onUpdate: () => {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(images[frameProxy.frame], 0, 0, canvas.width, canvas.height);
+          ctx.drawImage(images[Math.round(frameProxy.frame)], 0, 0, canvas.width, canvas.height);
         }
       }, 0);
     });
@@ -132,12 +141,7 @@ export function Hero() {
 
   return (
     <section ref={containerRef} className="relative w-full h-[100vh] min-h-[800px] overflow-hidden bg-brand-navy pt-24">
-      
-      {/* Background glow effects to match reference slightly */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-gold/5 rounded-full blur-[100px] pointer-events-none z-0" />
-
       <div className="max-w-[1440px] w-full mx-auto px-10 md:px-12 flex flex-col md:flex-row items-center justify-between relative z-10 h-full">
-        
         {/* Left Content */}
         <div className="w-full md:w-[45%] flex flex-col items-start z-30 pointer-events-auto">
           
@@ -167,23 +171,23 @@ export function Hero() {
         </div>
 
         {/* Right Content - Tooth Visual */}
-        <div className="w-full md:w-[50%] h-full relative flex flex-col items-center justify-center z-10 pt-10">
+        <div className="w-full md:w-[50%] h-full relative flex flex-col items-center justify-center z-10 pt-10" style={{ perspective: "1000px" }}>
           
           {/* Tooth Canvas Scrubber */}
           <div className="relative w-full h-[85%] z-20 flex items-center justify-center -ml-10 mt-10 pointer-events-none">
             <canvas
               ref={canvasRef}
-              className="w-full max-w-[800px] h-auto object-contain scale-[1.15] drop-shadow-2xl pointer-events-none"
+              className="w-full max-w-[800px] h-auto object-contain drop-shadow-2xl pointer-events-none origin-center"
             />
           </div>
 
           {/* Presentation Platform */}
-          <div ref={platformRef} className="absolute bottom-[5%] left-1/2 -translate-x-1/2 w-[110%] aspect-[4/1] pointer-events-none flex flex-col items-center justify-center z-10 -ml-5">
-            <div className="absolute w-[90%] h-full bg-gradient-to-b from-[#0D263B] to-transparent rounded-[100%] scale-y-[0.3] opacity-80 blur-[2px]" />
-            <div className="absolute w-[70%] h-full border border-brand-gold/40 rounded-[100%] scale-y-[0.3]" />
-            <div className="absolute w-[90%] h-full border border-brand-gold/20 rounded-[100%] scale-y-[0.3]" />
-            <div className="absolute w-[110%] h-full border border-brand-gold/10 rounded-[100%] scale-y-[0.3]" />
-            <div className="absolute w-[40%] h-full bg-brand-gold/20 rounded-[100%] scale-y-[0.3] blur-[40px]" />
+          <div ref={platformRef} className="absolute bottom-[10%] left-1/2 -translate-x-1/2 w-[90%] aspect-[4/1] pointer-events-none flex flex-col items-center justify-center z-10 -ml-5">
+            {/* Subtle base shadow directly underneath */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40%] h-[30%] bg-black/40 blur-[15px] rounded-[100%]" />
+            {/* Clean presentation rings */}
+            <div className="absolute w-[70%] h-full border border-brand-gold/20 rounded-[100%] scale-y-[0.25]" />
+            <div className="absolute w-[90%] h-full border border-brand-gold/10 rounded-[100%] scale-y-[0.25]" />
           </div>
 
         </div>

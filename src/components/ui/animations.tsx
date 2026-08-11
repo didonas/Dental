@@ -134,7 +134,7 @@ export const ParallaxImage = ({
   const y = useTransform(scrollYProgress, [0, 1], [-parallaxAmount, parallaxAmount]);
 
   return (
-    <div ref={ref} className={`relative overflow-hidden ${className || ""}`}>
+    <div ref={ref} className={`relative overflow-hidden w-full h-full ${className || ""}`}>
       <motion.img
         src={src}
         alt={alt}

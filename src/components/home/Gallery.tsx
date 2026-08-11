@@ -6,10 +6,10 @@ import { X, Maximize2 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const images = [
-  "/images/clinic_interior_1786365439022.jpg",
-  "/images/treatment_room_1786365456966.jpg",
-  "/images/about_clinic_neutral_1786370182535.jpg",
-  "/images/service_cosmetic_1786370221004.jpg" // 4th distinct image
+  "/images/environment/reception.jpg",
+  "/images/environment/treatment-room.jpg",
+  "/images/environment/consultation.jpg",
+  "/images/environment/technology.jpg"
 ];
 
 export function Gallery() {

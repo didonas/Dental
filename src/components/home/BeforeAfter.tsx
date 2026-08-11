@@ -64,7 +64,7 @@ export function BeforeAfter() {
         <Reveal delay={0.2} className="w-full">
           <div 
             ref={containerRef}
-            className="relative w-full max-w-[900px] mx-auto aspect-[16/10] md:aspect-[16/9] bg-brand-navy/5 rounded-[2px] overflow-hidden cursor-ew-resize select-none shadow-2xl group"
+            className="relative w-full max-w-[900px] mx-auto aspect-[16/10] md:aspect-[16/9] bg-[#101010] rounded-[2px] overflow-hidden cursor-ew-resize select-none shadow-2xl group"
             onMouseDown={(e) => {
               setIsDragging(true);
               handleMove(e.clientX);
@@ -74,18 +74,18 @@ export function BeforeAfter() {
               handleMove(e.touches[0].clientX);
             }}
           >
-            {/* After Image (Background) */}
+            {/* After Image (Background - Cleaned) */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img 
-              src="/images/teeth_3d/frame_29.png" 
+              src="/images/after_tooth.png" 
               alt="Healthy Smile After" 
-              className="absolute inset-0 w-full h-full object-contain bg-[#111111]"
+              className="absolute inset-0 w-full h-full object-contain"
               draggable={false}
             />
 
-            {/* Before Image (Clipped overlay) */}
+            {/* Before Image (Clipped overlay - Original Damaged) */}
             <div 
-              className="absolute inset-0 right-0 w-full h-full bg-[#111111]"
+              className="absolute inset-0 right-0 w-full h-full"
               style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
