@@ -28,7 +28,7 @@ const contactInfo = [
 
 export function Contact() {
   return (
-    <section className="bg-brand-ivory text-brand-navy py-24 lg:py-32">
+    <section id="contact" className="bg-brand-ivory text-brand-navy py-24 lg:py-32">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-16 lg:gap-24">
         
         {/* Left Column - Contact Info */}

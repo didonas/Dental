@@ -88,7 +88,7 @@ export default function AppointmentPage() {
         <div className="w-full lg:w-[50%] h-[300px] lg:h-[400px] relative rounded-[2px] overflow-hidden">
           <Reveal delay={0.3} className="w-full h-full">
             <Image 
-              src="/images/treatment_room_1786365456966.jpg" 
+              src="/images/environment/treatment-room.jpg" 
               alt="Morgans Treatment Room"
               fill
               className="object-cover"

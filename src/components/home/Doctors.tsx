@@ -17,7 +17,7 @@ const doctors = [
   {
     name: "Dr. Emily Roberts",
     role: "Cosmetic Dentist",
-    image: "https://images.unsplash.com/photo-1594824436968-70281b619213?auto=format&fit=crop&q=80&w=800"
+    image: "/images/doctor_placeholder_1786365535621.jpg"
   },
   {
     name: "Dr. James Wilson",
@@ -28,7 +28,7 @@ const doctors = [
 
 export function Doctors() {
   return (
-    <section className="bg-white text-brand-navy py-24 lg:py-32">
+    <section id="doctors" className="bg-white text-brand-navy py-24 lg:py-32">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12">
         
         {/* Header */}

@@ -12,10 +12,8 @@ export function Header() {
   const navLinks = [
     { name: "Home", active: true },
     { name: "About" },
-    { name: "Services" },
     { name: "Technology" },
     { name: "Doctors" },
-    { name: "Gallery" },
     { name: "Contact" },
   ];
 
