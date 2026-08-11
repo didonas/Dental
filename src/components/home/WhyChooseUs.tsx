@@ -59,7 +59,7 @@ export function WhyChooseUs() {
         <div className="w-full lg:w-1/2 h-[600px] lg:h-[750px] relative">
           <Reveal delay={0.4} direction="left" className="w-full h-full relative rounded-[2px] overflow-hidden bg-brand-ivory/10">
             <ParallaxImage 
-              src="/images/treatment_room_1786365456966.jpg" 
+              src="/images/environment/treatment-room.jpg" 
               alt="Morgans Treatment Room"
               parallaxAmount={40}
             />

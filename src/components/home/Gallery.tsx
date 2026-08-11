@@ -16,7 +16,7 @@ export function Gallery() {
   const [selectedImg, setSelectedImg] = useState<string | null>(null);
 
   return (
-    <section className="bg-white py-24 lg:py-32 relative">
+    <section id="gallery" className="bg-white py-24 lg:py-32 relative">
       
       {/* Lightbox */}
       <AnimatePresence>

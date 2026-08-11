@@ -68,7 +68,7 @@ export function About() {
           <Reveal delay={0.3} className="w-full h-full relative rounded-[2px] overflow-hidden">
             <div className="absolute inset-0 bg-brand-navy/20 z-10" />
             <ParallaxImage 
-              src="/images/about_clinic_neutral_1786370182535.jpg"
+              src="/images/environment/consultation.jpg"
               alt="Morgans Clinic Interior"
               parallaxAmount={40}
             />

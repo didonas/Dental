@@ -12,7 +12,7 @@ const services = [
   {
     title: "Cosmetic Dentistry",
     description: "Porcelain veneers, professional whitening, and complete smile makeovers.",
-    image: "/images/service_cosmetic_1786370221004.jpg"
+    image: "/images/environment/technology.jpg"
   },
   {
     title: "Orthodontics",
@@ -28,7 +28,7 @@ const services = [
 
 export function Services() {
   return (
-    <section className="bg-brand-ivory text-brand-navy py-24 lg:py-32">
+    <section id="services" className="bg-brand-ivory text-brand-navy py-24 lg:py-32">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12">
         
         {/* Header */}
