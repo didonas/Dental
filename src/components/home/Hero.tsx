@@ -139,7 +139,7 @@ export function Hero() {
       <div className="max-w-[1440px] w-full mx-auto px-10 md:px-12 flex flex-col md:flex-row items-center justify-between relative z-10 h-full">
         
         {/* Left Content */}
-        <div className="w-full md:w-[45%] flex flex-col items-start z-20">
+        <div className="w-full md:w-[45%] flex flex-col items-start z-30 pointer-events-auto">
           
           <h1 className="font-serif text-[72px] lg:text-[88px] xl:text-[96px] leading-[0.96] text-white font-medium mb-8 tracking-tight">
             Excellence<br />
@@ -170,10 +170,10 @@ export function Hero() {
         <div className="w-full md:w-[50%] h-full relative flex flex-col items-center justify-center z-10 pt-10">
           
           {/* Tooth Canvas Scrubber */}
-          <div className="relative w-full h-[85%] z-20 flex items-center justify-center -ml-10 mt-10">
+          <div className="relative w-full h-[85%] z-20 flex items-center justify-center -ml-10 mt-10 pointer-events-none">
             <canvas
               ref={canvasRef}
-              className="w-full max-w-[800px] h-auto object-contain scale-[1.15] drop-shadow-2xl"
+              className="w-full max-w-[800px] h-auto object-contain scale-[1.15] drop-shadow-2xl pointer-events-none"
             />
           </div>
 
