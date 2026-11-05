@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ArrowRight, CheckCircle2, Phone, MessageCircle, MapPin } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, ArrowLeft, CheckCircle2, Phone, MessageCircle, MapPin } from "lucide-react";
 import { Reveal } from "@/components/ui/animations";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -66,7 +67,25 @@ export default function AppointmentPage() {
   const today = new Date().toISOString().split("T")[0];
 
   return (
-    <main className="min-h-screen bg-brand-ivory text-brand-navy pt-24 pb-32">
+    <main className="min-h-screen bg-brand-ivory text-brand-navy pt-6 pb-32">
+      {/* Top Header Bar */}
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-4 flex items-center justify-between border-b border-brand-navy/10 mb-8">
+        <Link href="/" className="flex flex-col text-brand-navy group">
+          <span className="font-serif text-[24px] leading-none tracking-wide font-medium">
+            DENTAL
+          </span>
+          <span className="text-[7.5px] tracking-[0.25em] uppercase mt-1 opacity-70">
+            Clinic & Maxillofacial Care
+          </span>
+        </Link>
+        <Link 
+          href="/" 
+          className="inline-flex items-center gap-2 text-[14px] font-medium text-brand-navy/80 hover:text-brand-navy transition-colors py-2 px-4 rounded-[2px] hover:bg-brand-navy/5"
+        >
+          <ArrowLeft size={16} />
+          <span>Back to Homepage</span>
+        </Link>
+      </div>
       
       {/* Appointment Hero */}
       <section className="max-w-[1440px] mx-auto px-6 md:px-12 py-12 lg:py-20 flex flex-col lg:flex-row gap-12 lg:gap-24 items-center border-b border-brand-navy/10 mb-16">
@@ -89,7 +108,7 @@ export default function AppointmentPage() {
           <Reveal delay={0.3} className="w-full h-full">
             <Image 
               src="/images/environment/treatment-room.jpg" 
-              alt="Morgans Treatment Room"
+              alt="Dental Treatment Room"
               fill
               className="object-cover"
             />

@@ -34,15 +34,15 @@ export function About() {
             
             <StaggerItem>
               <p className="text-white/70 text-[18px] leading-[1.8] max-w-lg mb-10 font-light">
-                At Morgans Dental & Maxillofacial Centre, modern dentistry meets specialist expertise and compassionate patient care.
+                At our dental clinic, modern dentistry meets specialist expertise and compassionate patient care.
               </p>
             </StaggerItem>
 
             <StaggerItem>
-              <button className="flex items-center gap-3 text-brand-gold hover:text-white transition-colors group mb-16 pb-2 border-b border-brand-gold/30 hover:border-white">
+              <a href="#services" className="inline-flex items-center gap-3 text-brand-gold hover:text-white transition-colors group mb-16 pb-2 border-b border-brand-gold/30 hover:border-white">
                 <span className="text-[15px] font-medium tracking-wide uppercase">Learn More About Us</span>
                 <ArrowRight size={18} className="transform group-hover:translate-x-1 transition-transform" />
-              </button>
+              </a>
             </StaggerItem>
           </StaggerContainer>
 
@@ -69,7 +69,7 @@ export function About() {
             <div className="absolute inset-0 bg-brand-navy/20 z-10" />
             <ParallaxImage 
               src="/images/environment/consultation.jpg"
-              alt="Morgans Clinic Interior"
+              alt="Dental Clinic Interior"
               parallaxAmount={40}
             />
           </Reveal>

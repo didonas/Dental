@@ -59,8 +59,8 @@ export function WhyChooseUs() {
         <div className="w-full lg:w-1/2 h-[600px] lg:h-[750px] relative">
           <Reveal delay={0.4} direction="left" className="w-full h-full relative rounded-[2px] overflow-hidden bg-brand-ivory/10">
             <ParallaxImage 
-              src="/images/environment/treatment-room.jpg" 
-              alt="Morgans Treatment Room"
+              src="/images/environment/premium-treatment.jpg" 
+              alt="Dental Treatment Room"
               parallaxAmount={40}
             />
             <div className="absolute inset-0 bg-brand-navy/10 z-10" />

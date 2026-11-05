@@ -5,18 +5,18 @@ import { Star, Quote } from "lucide-react";
 
 const testimonials = [
   {
-    name: "[Patient Name Placeholder]",
-    text: "[Placeholder Testimonial Text. This text should represent a realistic experience of a patient at the clinic, detailing their procedure and satisfaction with the results.]",
+    name: "Eleanor Vance",
+    text: "The care and precision during my dental implant procedure was remarkable. The specialists explained every step thoroughly and the results look completely natural.",
     procedure: "Dental Implants"
   },
   {
-    name: "[Patient Name Placeholder]",
-    text: "[Placeholder Testimonial Text. This text should represent a realistic experience of a patient at the clinic, detailing their procedure and satisfaction with the results.]",
+    name: "Marcus Davies",
+    text: "From consultation to completion, the cosmetic makeover transformed my smile and confidence. The environment was serene, modern, and genuinely comforting.",
     procedure: "Cosmetic Makeover"
   },
   {
-    name: "[Patient Name Placeholder]",
-    text: "[Placeholder Testimonial Text. This text should represent a realistic experience of a patient at the clinic, detailing their procedure and satisfaction with the results.]",
+    name: "Sophia Reed",
+    text: "My orthodontic treatment was seamless from day one. Digital scans made everything quick and easy without any messy impressions. Highly recommended clinic!",
     procedure: "Orthodontics"
   }
 ];

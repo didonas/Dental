@@ -1,146 +1,57 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
-import { Play } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { useRef, useState, useCallback } from "react";
+import { Play, Sparkles } from "lucide-react";
 import Link from "next/link";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
-const TOTAL_FRAMES = 30;
-
 export function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imagesRef = useRef<HTMLImageElement[]>([]);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-  
-  const platformRef = useRef<HTMLDivElement>(null);
+  const toothContainerRef = useRef<HTMLDivElement>(null);
+  const [lensPos, setLensPos] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
-  // Preload Images
-  useEffect(() => {
-    let loadedCount = 0;
-    const images: HTMLImageElement[] = [];
+  const LENS_RADIUS = 120; // 240px diameter
 
-    for (let i = 0; i < TOTAL_FRAMES; i++) {
-      const img = new Image();
-      const paddedIndex = i.toString().padStart(2, "0");
-      img.src = `/images/teeth_3d/frame_${paddedIndex}.png`;
-      img.onload = () => {
-        loadedCount++;
-        if (loadedCount === TOTAL_FRAMES) {
-          imagesRef.current = images;
-          setImagesLoaded(true);
-        }
-      };
-      images.push(img);
-    }
+  const updateCoordinates = useCallback((clientX: number, clientY: number) => {
+    if (!toothContainerRef.current) return;
+    const rect = toothContainerRef.current.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+    setLensPos({ x, y });
   }, []);
 
-  useGSAP(() => {
-    if (!containerRef.current || !canvasRef.current || !imagesLoaded) return;
-    
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    updateCoordinates(e.clientX, e.clientY);
+    if (!isHovering) setIsHovering(true);
+    if (!hasInteracted) setHasInteracted(true);
+  };
 
-    canvas.width = 1200;
-    canvas.height = 1200;
+  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+    updateCoordinates(e.clientX, e.clientY);
+    setIsHovering(true);
+    setHasInteracted(true);
+  };
 
-    const images = imagesRef.current;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(images[0], 0, 0, canvas.width, canvas.height);
-    
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) {
-      const proxy = { frame: 0 };
-      gsap.to(proxy, {
-        frame: TOTAL_FRAMES - 1,
-        duration: 1,
-        delay: 1,
-        onUpdate: () => {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(images[Math.round(proxy.frame)], 0, 0, canvas.width, canvas.height);
-        }
-      });
-      return;
-    }
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+  };
 
-    const mm = gsap.matchMedia();
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.touches.length === 0) return;
+    updateCoordinates(e.touches[0].clientX, e.touches[0].clientY);
+    if (!isHovering) setIsHovering(true);
+    if (!hasInteracted) setHasInteracted(true);
+  };
 
-    mm.add("(min-width: 768px)", () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "+=150%", 
-          scrub: 2,
-          pin: true,
-        },
-      });
-
-      // Subtle rotation and float on the canvas wrapper
-      gsap.set(canvasRef.current, { rotationY: -8, y: 0, scale: 1 });
-      tl.to(canvasRef.current, {
-        rotationY: 10,
-        y: -5,
-        scale: 1.015,
-        ease: "sine.inOut",
-        duration: 1
-      }, 0);
-
-      const frameProxy = { frame: 0 };
-      tl.to(frameProxy, {
-        frame: TOTAL_FRAMES - 1,
-        ease: "none",
-        duration: 1,
-        onUpdate: () => {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(images[Math.round(frameProxy.frame)], 0, 0, canvas.width, canvas.height);
-        }
-      }, 0);
-    });
-
-    mm.add("(max-width: 767px)", () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "+=120%", 
-          scrub: 2,
-          pin: true,
-        },
-      });
-
-      gsap.set(canvasRef.current, { rotationY: -8, y: 0, scale: 1 });
-      tl.to(canvasRef.current, {
-        rotationY: 10,
-        y: -5,
-        scale: 1.015,
-        ease: "sine.inOut",
-        duration: 1
-      }, 0);
-
-      const frameProxy = { frame: 0 };
-      tl.to(frameProxy, {
-        frame: TOTAL_FRAMES - 1,
-        ease: "none",
-        duration: 1,
-        onUpdate: () => {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(images[Math.round(frameProxy.frame)], 0, 0, canvas.width, canvas.height);
-        }
-      }, 0);
-    });
-
-  }, { scope: containerRef, dependencies: [imagesLoaded] });
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.touches.length === 0) return;
+    updateCoordinates(e.touches[0].clientX, e.touches[0].clientY);
+    setIsHovering(true);
+    setHasInteracted(true);
+  };
 
   return (
-    <section ref={containerRef} className="relative w-full h-[100vh] min-h-[800px] overflow-hidden bg-brand-navy pt-24">
+    <section id="home" className="relative w-full h-[100vh] min-h-[800px] overflow-hidden bg-brand-navy pt-24 select-none">
       <div className="max-w-[1440px] w-full mx-auto px-10 md:px-12 flex flex-col md:flex-row items-center justify-between relative z-10 h-full">
         {/* Left Content */}
         <div className="w-full md:w-[45%] flex flex-col items-start z-30 pointer-events-auto">
@@ -170,20 +81,102 @@ export function Hero() {
 
         </div>
 
-        {/* Right Content - Tooth Visual */}
-        <div className="w-full md:w-[50%] h-full relative flex flex-col items-center justify-center z-10 pt-10" style={{ perspective: "1000px" }}>
+        {/* Right Content - Tooth Visual with Magnifying Glass Inspector */}
+        <div className="w-full md:w-[55%] h-full relative flex flex-col items-center justify-center z-10 pt-6">
           
-          {/* Tooth Canvas Scrubber */}
-          <div className="relative w-full h-[85%] z-20 flex items-center justify-center -ml-10 mt-10 pointer-events-none">
-            <canvas
-              ref={canvasRef}
-              className="w-full max-w-[800px] h-auto object-contain drop-shadow-2xl pointer-events-none origin-center"
+          {/* Tooth Container with Hover Inspector */}
+          <div 
+            ref={toothContainerRef}
+            className={`relative w-full max-w-[700px] h-[75%] md:h-[82%] z-20 flex items-center justify-center -ml-5 ${isHovering ? "cursor-none" : "cursor-crosshair"}`}
+            onMouseMove={handleMouseMove}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onTouchMove={handleTouchMove}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={() => setIsHovering(false)}
+          >
+            {/* Base Layer: Damaged Tooth */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/teeth_3d/frame_00.png"
+              alt="Damaged Tooth Inspection"
+              className="absolute inset-0 w-full h-full object-contain drop-shadow-2xl pointer-events-none select-none transition-transform duration-500 ease-out"
+              draggable={false}
             />
+
+            {/* Revealed Layer: Clean, White, Restored Tooth inside the Lens */}
+            <div 
+              className="absolute inset-0 w-full h-full pointer-events-none select-none transition-opacity duration-150"
+              style={{
+                opacity: isHovering ? 1 : 0,
+                clipPath: isHovering ? `circle(${LENS_RADIUS}px at ${lensPos.x}px ${lensPos.y}px)` : 'circle(0px at 0 0)',
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/teeth_3d/frame_00.png"
+                alt="Restored Enamel Preview"
+                className="absolute inset-0 w-full h-full object-contain brightness-[1.55] contrast-[1.12] saturate-[0.1] hue-rotate-[-10deg]"
+                draggable={false}
+              />
+            </div>
+
+            {/* Magnifying Glass Lens Frame, Reflection, and Handle */}
+            {isHovering && (
+              <div
+                className="absolute pointer-events-none z-30 transition-transform duration-75 ease-out"
+                style={{
+                  left: `${lensPos.x}px`,
+                  top: `${lensPos.y}px`,
+                  transform: 'translate(-50%, -50%)',
+                }}
+              >
+                {/* Outer Glass Rim */}
+                <div 
+                  className="relative rounded-full border-[3.5px] border-brand-gold shadow-[0_15px_45px_rgba(0,0,0,0.65),0_0_30px_rgba(201,173,120,0.35)] flex items-center justify-center overflow-visible"
+                  style={{
+                    width: `${LENS_RADIUS * 2}px`,
+                    height: `${LENS_RADIUS * 2}px`,
+                  }}
+                >
+                  {/* Inner Metallic Bezel Ring */}
+                  <div className="absolute inset-1 rounded-full border border-white/40 pointer-events-none" />
+
+                  {/* Diagonal Glass Sheen Highlight */}
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/10 to-white/30 pointer-events-none" />
+
+                  {/* Upper-Left Light Flare */}
+                  <div className="absolute top-5 left-7 w-12 h-5 rounded-full bg-white/30 blur-[1px] rotate-[-35deg] pointer-events-none" />
+
+                  {/* Healthy Enamel Floating Badge */}
+                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#071A2A]/90 border border-brand-gold/60 text-brand-gold text-[10px] uppercase tracking-widest px-3 py-0.5 rounded-full backdrop-blur-md shadow-xl whitespace-nowrap font-medium pointer-events-none flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse" />
+                    Healthy Enamel
+                  </div>
+
+                  {/* Magnifying Glass Handle (Sleek Dental Inspection Mirror Style) */}
+                  <div 
+                    className="absolute -bottom-12 -right-12 w-16 h-3 bg-gradient-to-r from-brand-gold via-[#edd9b2] to-brand-gold rounded-full shadow-2xl origin-top-left rotate-45 border border-black/30 pointer-events-none flex items-center justify-end pr-1"
+                  >
+                    <div className="w-2 h-2 rounded-full bg-[#071A2A]" />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Initial Helper Hint Badge */}
+            {!hasInteracted && (
+              <div className="absolute top-[28%] right-[8%] z-20 bg-[#071A2A]/85 border border-brand-gold/60 text-white text-[12px] tracking-wider px-4 py-2 rounded-full backdrop-blur-md shadow-2xl flex items-center gap-2 pointer-events-none animate-pulse">
+                <Sparkles size={14} className="text-brand-gold" />
+                <span>Hover over tooth to inspect restoration</span>
+              </div>
+            )}
+
           </div>
 
           {/* Presentation Platform */}
-          <div ref={platformRef} className="absolute bottom-[10%] left-1/2 -translate-x-1/2 w-[90%] aspect-[4/1] pointer-events-none flex flex-col items-center justify-center z-10 -ml-5">
-            {/* Subtle base shadow directly underneath */}
+          <div className="absolute bottom-[10%] left-1/2 -translate-x-1/2 w-[90%] aspect-[4/1] pointer-events-none flex flex-col items-center justify-center z-10 -ml-5">
+            {/* Base shadow underneath */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40%] h-[30%] bg-black/40 blur-[15px] rounded-[100%]" />
             {/* Clean presentation rings */}
             <div className="absolute w-[70%] h-full border border-brand-gold/20 rounded-[100%] scale-y-[0.25]" />

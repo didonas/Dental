@@ -7,22 +7,22 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Address",
-    content: "[123 Luxury Clinic Blvd, Medical District, London, UK]"
+    content: "123 Healthcare Blvd, Medical District, London, UK"
   },
   {
     icon: Phone,
     title: "Phone & WhatsApp",
-    content: "[+44 (0) 20 1234 5678]"
+    content: "+44 (0) 20 1234 5678"
   },
   {
     icon: Mail,
     title: "Email",
-    content: "[contact@morgansdental.com]"
+    content: "contact@dentalclinic.com"
   },
   {
     icon: Clock,
     title: "Working Hours",
-    content: "[Mon - Fri: 9:00 AM - 6:00 PM]\n[Sat: 10:00 AM - 2:00 PM]"
+    content: "Mon - Fri: 9:00 AM - 6:00 PM\nSat: 10:00 AM - 2:00 PM"
   }
 ];
 

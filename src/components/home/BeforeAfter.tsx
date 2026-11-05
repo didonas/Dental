@@ -74,25 +74,25 @@ export function BeforeAfter() {
               handleMove(e.touches[0].clientX);
             }}
           >
-            {/* After Image (Background - Cleaned) */}
+            {/* Before Image (Background - always fully visible) */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img 
-              src="/images/after_tooth.png" 
-              alt="Healthy Smile After" 
+              src="/images/teeth_3d/frame_00.png" 
+              alt="Damaged Smile Before" 
               className="absolute inset-0 w-full h-full object-contain"
               draggable={false}
             />
 
-            {/* Before Image (Clipped overlay - Original Damaged) */}
+            {/* After Image (Clipped overlay - Cleaned with CSS) */}
             <div 
-              className="absolute inset-0 right-0 w-full h-full"
-              style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+              className="absolute inset-0 w-full h-full overflow-hidden"
+              style={{ clipPath: `inset(0 0 0 ${sliderPosition}%)` }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
                 src="/images/teeth_3d/frame_00.png" 
-                alt="Damaged Smile Before" 
-                className="absolute inset-0 w-full h-full object-contain"
+                alt="Healthy Smile After" 
+                className="absolute inset-0 w-full h-full object-contain brightness-[1.5] contrast-[1.1] saturate-[0.15] hue-rotate-[-10deg]"
                 draggable={false}
               />
             </div>

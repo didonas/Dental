@@ -27,10 +27,10 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex flex-col gsap-header-text text-white relative z-[110]">
             <span className="font-serif text-[28px] leading-none tracking-wide font-medium">
-              MORGANS
+              DENTAL
             </span>
             <span className="text-[7.5px] tracking-[0.25em] uppercase mt-1 opacity-70">
-              Dental & Maxillofacial Centre
+              Clinic & Maxillofacial Care
             </span>
           </Link>
 
@@ -39,7 +39,7 @@ export function Header() {
             {navLinks.map((item) => (
               <Link
                 key={item.name}
-                href={`#${item.name.toLowerCase()}`}
+                href={item.name === "Home" ? "/#home" : `/#${item.name.toLowerCase()}`}
                 className={cn(
                   "text-[13px] font-medium transition-colors relative pb-1 gsap-header-text",
                   item.active ? "text-white" : "text-white/70 hover:opacity-100"
@@ -82,7 +82,7 @@ export function Header() {
               {navLinks.map((item) => (
                 <Link
                   key={item.name}
-                  href={`#${item.name.toLowerCase()}`}
+                  href={item.name === "Home" ? "/#home" : `/#${item.name.toLowerCase()}`}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="text-[20px] font-medium text-white/80 hover:text-white transition-colors"
                 >

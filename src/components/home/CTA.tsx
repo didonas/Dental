@@ -36,10 +36,10 @@ export function CTA() {
             <ArrowRight size={18} className="transform group-hover:translate-x-1 transition-transform" />
           </Link>
           
-          <button className="bg-white/10 text-white px-10 py-5 text-[15px] font-semibold transition-colors hover:bg-white/20 border border-white/10 rounded-[2px] tracking-wide flex items-center justify-center gap-3 w-full sm:w-auto">
+          <a href="tel:+442012345678" className="bg-white/10 text-white px-10 py-5 text-[15px] font-semibold transition-colors hover:bg-white/20 border border-white/10 rounded-[2px] tracking-wide flex items-center justify-center gap-3 w-full sm:w-auto">
             <Phone size={18} />
             Call Clinic
-          </button>
+          </a>
         </Reveal>
 
       </div>

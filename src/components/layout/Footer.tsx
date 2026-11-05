@@ -13,7 +13,7 @@ export function Footer() {
             {/* Brand */}
             <div className="flex flex-col">
               <h2 className="font-serif text-[28px] tracking-wide mb-6">
-                MORGANS<span className="text-brand-gold">.</span>
+                DENTAL<span className="text-brand-gold">.</span>
               </h2>
               <p className="text-white/50 text-[14px] leading-[1.6] max-w-xs mb-8 font-light">
                 Redefining modern dentistry with specialist expertise and compassionate patient care.
@@ -38,11 +38,11 @@ export function Footer() {
                 Clinic
               </h4>
               <ul className="flex flex-col gap-4">
-                <li><a href="#" className="text-white/50 hover:text-brand-gold transition-colors text-[15px]">About Us</a></li>
-                <li><a href="#" className="text-white/50 hover:text-brand-gold transition-colors text-[15px]">Our Team</a></li>
-                <li><a href="#" className="text-white/50 hover:text-brand-gold transition-colors text-[15px]">Technology</a></li>
-                <li><a href="#" className="text-white/50 hover:text-brand-gold transition-colors text-[15px]">Gallery</a></li>
-                <li><a href="#" className="text-white/50 hover:text-brand-gold transition-colors text-[15px]">Contact</a></li>
+                <li><a href="/#about" className="text-white/50 hover:text-brand-gold transition-colors text-[15px]">About Us</a></li>
+                <li><a href="/#doctors" className="text-white/50 hover:text-brand-gold transition-colors text-[15px]">Our Team</a></li>
+                <li><a href="/#technology" className="text-white/50 hover:text-brand-gold transition-colors text-[15px]">Technology</a></li>
+                <li><a href="/#gallery" className="text-white/50 hover:text-brand-gold transition-colors text-[15px]">Gallery</a></li>
+                <li><a href="/#contact" className="text-white/50 hover:text-brand-gold transition-colors text-[15px]">Contact</a></li>
               </ul>
             </div>
 
@@ -52,11 +52,11 @@ export function Footer() {
                 Treatments
               </h4>
               <ul className="flex flex-col gap-4">
-                <li><a href="#" className="text-white/50 hover:text-brand-gold transition-colors text-[15px]">Dental Implants</a></li>
-                <li><a href="#" className="text-white/50 hover:text-brand-gold transition-colors text-[15px]">Cosmetic Dentistry</a></li>
-                <li><a href="#" className="text-white/50 hover:text-brand-gold transition-colors text-[15px]">Orthodontics</a></li>
-                <li><a href="#" className="text-white/50 hover:text-brand-gold transition-colors text-[15px]">Root Canal</a></li>
-                <li><a href="#" className="text-white/50 hover:text-brand-gold transition-colors text-[15px]">Maxillofacial</a></li>
+                <li><a href="/#services" className="text-white/50 hover:text-brand-gold transition-colors text-[15px]">Dental Implants</a></li>
+                <li><a href="/#services" className="text-white/50 hover:text-brand-gold transition-colors text-[15px]">Cosmetic Dentistry</a></li>
+                <li><a href="/#services" className="text-white/50 hover:text-brand-gold transition-colors text-[15px]">Orthodontics</a></li>
+                <li><a href="/#services" className="text-white/50 hover:text-brand-gold transition-colors text-[15px]">Root Canal</a></li>
+                <li><a href="/#services" className="text-white/50 hover:text-brand-gold transition-colors text-[15px]">Maxillofacial</a></li>
               </ul>
             </div>
 
@@ -87,7 +87,7 @@ export function Footer() {
         <Reveal delay={0.2}>
           <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 gap-4">
             <p className="text-white/30 text-[13px]">
-              &copy; {new Date().getFullYear()} Morgans Dental & Maxillofacial Centre. All rights reserved.
+              &copy; {new Date().getFullYear()} Dental Clinic. All rights reserved.
             </p>
             <div className="flex gap-6">
               <a href="#" className="text-white/30 hover:text-white transition-colors text-[13px]">Privacy Policy</a>

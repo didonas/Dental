@@ -15,8 +15,8 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Morgans Dental & Maxillofacial Centre",
-  description: "Advanced dental and maxillofacial care.",
+  title: "Dental Clinic - Advanced Dental Care",
+  description: "Comprehensive dental care, implants, and specialist dentistry.",
 };
 
 export default function RootLayout({
