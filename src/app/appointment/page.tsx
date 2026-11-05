@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowLeft, CheckCircle2, Phone, MessageCircle, MapPin } from "lucide-react";
@@ -22,6 +22,17 @@ export default function AppointmentPage() {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSuccess, setIsSuccess] = useState(false);
+
+  // Auto-select treatment from query params if coming from Service details
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const treatmentParam = params.get("treatment");
+      if (treatmentParam) {
+        setFormData((prev) => ({ ...prev, treatment: treatmentParam }));
+      }
+    }
+  }, []);
 
   const timeSlots = [
     "09:00 AM", "10:00 AM", "11:30 AM", "02:00 PM", "03:30 PM", "05:00 PM"
